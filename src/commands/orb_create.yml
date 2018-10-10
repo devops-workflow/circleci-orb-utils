@@ -1,0 +1,21 @@
+description: "Create orb in registry if it is not already there"
+parameters:
+  namespace:
+    description: Orb namespace
+    default: devops-workflow
+    type: string
+  orb:
+    description: Orb name
+    type: string
+steps:
+  - run:
+      name: "Create orb"
+      command: |
+          circleci orb create << namespace >>/<< orb >>
+          if [ "$?" -ne 0 ]; then
+            if [ $(circleci orb list << namespace >> | grep ^<< namespace >>/<< orb >> | wc -l) -eq 1 ]; then
+              echo "WARN: Orb create failed. Already exists: << namespace >>/<< orb >>"
+            else
+              echo "ERROR: Orb create failed. Unknown reason"
+            fi
+          fi
