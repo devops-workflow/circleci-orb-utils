@@ -5,11 +5,12 @@ steps:
       command: |
           echo "Repo: ${CIRCLE_PROJECT_REPONAME}"
           echo "Orb: ${CIRCLE_PROJECT_REPONAME#circleci-orb-}"
-          echo "${CIRCLE_PROJECT_REPONAME#circleci-orb-}" > workspace/orb/orbname
-      - persist_to_workspace:
-          root: workspace
-          paths:
-            - orb
+          mkdir -p workspace/orb
+          #echo "${CIRCLE_PROJECT_REPONAME#circleci-orb-}" > workspace/orb/orbname
+  - persist_to_workspace:
+      root: workspace
+      paths:
+        - orb
 # To get orb name in other jobs
 #  steps:
 #    - attach_workspace:
