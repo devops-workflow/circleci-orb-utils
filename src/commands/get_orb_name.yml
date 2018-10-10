@@ -1,0 +1,17 @@
+description: "Get orb name from repo name. Assume repo name format: circleci-orb-<orb name>"
+steps:
+  - run:
+      name: "Getting orb name"
+      command: |
+          echo "Repo: ${CIRCLE_PROJECT_REPONAME}"
+          echo "Orb: ${CIRCLE_PROJECT_REPONAME#circleci-orb-}"
+          echo "${CIRCLE_PROJECT_REPONAME#circleci-orb-}" > workspace/orb/orbname
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - orb
+# To get orb name in other jobs
+#  steps:
+#    - attach_workspace:
+#        at: /tmp/workspace
+#    - run: orb=$(cat /tmp/workspace/orb/orbname)
