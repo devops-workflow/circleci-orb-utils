@@ -6,7 +6,7 @@ steps:
           echo "Repo: ${CIRCLE_PROJECT_REPONAME}"
           echo "Orb: ${CIRCLE_PROJECT_REPONAME#circleci-orb-}"
           mkdir -p workspace/orb
-          #echo "${CIRCLE_PROJECT_REPONAME#circleci-orb-}" > workspace/orb/orbname
+          echo "${CIRCLE_PROJECT_REPONAME#circleci-orb-}" > workspace/orb/orbname
   # save_to_workspace
   - persist_to_workspace:
       root: workspace
