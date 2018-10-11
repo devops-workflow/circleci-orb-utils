@@ -1,0 +1,7 @@
+description: "Get orb name from workspace and add to $BASH_ENV."
+steps:
+  - attach_workspace:
+      at: /tmp/workspace
+  - run:
+      name: "Add variable `orbname` to `$BASH_ENV`"
+      command: echo "export orbname=$(cat /tmp/workspace/orb/orbname)" >> $BASH_ENV
